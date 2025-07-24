@@ -1,4 +1,4 @@
-# EN > TR Çeviri API 🇬🇧➡️🇹🇷
+# Bridge: EN <> TR Translator API 🌉
 
 ![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
 ![FastAPI](https://img.shields.io/badge/FastAPI-Ready-green?style=for-the-badge&logo=fastapi)
@@ -31,19 +31,19 @@ Projeyi çalıştırmanın en hızlı ve tavsiye edilen yolu Docker kullanmaktı
 
 1.  **Projeyi Klonlayın:**
     ```bash
-    git clone [https://github.com/kullanici-adiniz/proje-adiniz.git](https://github.com/kullanici-adiniz/proje-adiniz.git)
-    cd proje-adiniz
+    git clone [https://github.com/kullanici-adiniz/proje-adiniz.git](https://github.com/BlackRazor34/bridge-translator-api.git)
+    cd bridge-translator-api
     ```
     *(Not: Henüz GitHub'a yüklemediyseniz bu adımı atlayıp doğrudan proje klasörünüzde devam edebilirsiniz.)*
 
 2.  **Docker İmajını Oluşturun (Build):**
     ```bash
-    docker build -t eng-tur-translator .
+    docker build -t bridge-translator .
     ```
 
 3.  **Container'ı Çalıştırın (Run):**
     ```bash
-    docker run -p 8000:8500 eng-tur-translator
+    docker run -p 8000:8500 bridge-translator
     ```
     Uygulamanız artık `http://localhost:8000` adresinde çalışıyor!
 

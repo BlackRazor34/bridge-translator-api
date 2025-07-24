@@ -6,7 +6,7 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="English to Turkish Translator")
+app = FastAPI(title="Bridge: EN <> TR Translator API")
 
 # Model yükleme
 model_name = "Helsinki-NLP/opus-mt-tc-big-en-tr"
