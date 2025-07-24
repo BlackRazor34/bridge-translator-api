@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Çeviri</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Bridge Translator 🌉</h1>
+            <p>İngilizce metinleri anında Türkçe'ye çevirin.</p>
+        </header>
+
+        <main>
+            <div class="translator-box">
+                <textarea id="input-text" placeholder="Çevirmek için metin girin..."></textarea>
+                <textarea id="output-text" placeholder="Çeviri burada görünecek..." readonly></textarea>
+            </div>
+            <div class="controls">
+                <button id="translate-btn">
+                    <span class="btn-text">Çevir</span>
+                    <div class="spinner" style="display: none;"></div>
+                </button>
+                <button id="copy-btn" title="Çeviriyi Kopyala">Kopyala</button>
+                <button id="clear-btn" title="Metni Temizle">Temizle</button>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by FastAPI & Hugging Face</p>
+        </footer>
+    </div>
+
+    <script>
+        const inputText = document.getElementById('input-text');
+        const outputText = document.getElementById('output-text');
+        const translateBtn = document.getElementById('translate-btn');
+        const btnText = document.querySelector('.btn-text');
+        const spinner = document.querySelector('.spinner');
+        const copyBtn = document.getElementById('copy-btn');
+        const clearBtn = document.getElementById('clear-btn');
+
+        async function performTranslation() {
+            const text = inputText.value.trim();
+            if (!text) return;
+
+            // Butonu yükleme moduna al
+            translateBtn.disabled = true;
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+            outputText.value = '';
+
+            try {
+                const response = await fetch(`/translate?q=${encodeURIComponent(text)}`);
+                if (!response.ok) {
+                    throw new Error('Çeviri sırasında bir hata oluştu.');
+                }
+                const data = await response.json();
+                outputText.value = data.translation;
+            } catch (error) {
+                outputText.value = error.message;
+            } finally {
+                // Butonu normal moda geri döndür
+                translateBtn.disabled = false;
+                btnText.style.display = 'inline';
+                spinner.style.display = 'none';
+            }
+        }
+        
+        // "Çevir" butonuna tıklama olayı
+        translateBtn.addEventListener('click', performTranslation);
+
+        // "Kopyala" butonuna tıklama olayı
+        copyBtn.addEventListener('click', () => {
+            if(outputText.value) {
+                navigator.clipboard.writeText(outputText.value);
+                alert('Çeviri panoya kopyalandı!');
+            }
+        });
+
+        // "Temizle" butonuna tıklama olayı
+        clearBtn.addEventListener('click', () => {
+            inputText.value = '';
+            outputText.value = '';
+        });
+
+    </script>
+</body>
+</html>

@@ -1,11 +1,6 @@
 # Python image
 FROM python:3.11-slim
 
-# Sistem bağımlılıklarını yükle
-RUN apt-get update && apt-get install -y \
-    build-essential \
-    && rm -rf /var/lib/apt/lists/*
-
 # Çalışma dizini
 WORKDIR /app
 
@@ -16,8 +11,9 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Uygulama dosyasını kopyala
-COPY app.py .
+# ÖNEMLİ DEĞİŞİKLİK:
+# Geri kalan tüm proje dosyalarını (app.py, static/, templates/) kopyala
+COPY . .
 
 # Port'u expose et
 EXPOSE 8500
