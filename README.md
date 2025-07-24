@@ -1,4 +1,4 @@
-# English to Turkish Translator API 🇬🇧➡️🇹🇷
+# English to Turkish Translator API EN➡️TR
 
 This project provides a REST API for translating English text to Turkish using the `Helsinki-NLP/opus-mt-tc-big-en-tr` model.
 
